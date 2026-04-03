@@ -5,6 +5,7 @@ import java.io.Serializable;
 import org.springframework.beans.BeanUtils;
 
 import com.eduardocaio.task_manager_project.dto.TaskDTO;
+import com.eduardocaio.task_manager_project.enums.TaskPriority;
 import com.eduardocaio.task_manager_project.enums.TaskStatus;
 
 import jakarta.persistence.Column;
@@ -44,9 +45,17 @@ public class TaskEntity implements Serializable{
     @Column(nullable = false)
     private TaskStatus status;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TaskPriority priority;
+
     @ManyToOne
     @JoinColumn(name = "project_id")
     private ProjectEntity project;
+
+    @ManyToOne
+    @JoinColumn(name = "assigned_user_id")
+    private UserEntity assignedTo;
 
     public TaskEntity(TaskDTO task){
         BeanUtils.copyProperties(task, this);
