@@ -5,9 +5,12 @@ import java.io.Serializable;
 import org.springframework.beans.BeanUtils;
 
 import com.eduardocaio.task_manager_project.dto.TaskDTO;
+import com.eduardocaio.task_manager_project.enums.TaskStatus;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -35,14 +38,15 @@ public class TaskEntity implements Serializable{
     @Column(nullable = false)
     private String description;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private boolean status;
+    private TaskStatus status;
 
     public TaskEntity(TaskDTO task){
         BeanUtils.copyProperties(task, this);
     }
 
-    public boolean getStatus(){
+    public TaskStatus getStatus(){
         return status;
     }
 
