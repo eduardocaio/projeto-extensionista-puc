@@ -1,5 +1,7 @@
 package com.eduardocaio.task_manager_project.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,8 +28,16 @@ public class UserService {
     }
 
     public UserEntity findByUsername(String username) {
-        return userRepository.findByUsername(username)
-            .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        return userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+    }
+
+    public List<UserEntity> findAllByUsernameIn(List<String> usernames){
+        List<UserEntity> users = userRepository.findAllByUsernameIn(usernames);
+
+        if (users.isEmpty()) 
+            throw new RuntimeException("Nenhum usuário encontrado na lista");
+
+        return users;
     }
 
 }
