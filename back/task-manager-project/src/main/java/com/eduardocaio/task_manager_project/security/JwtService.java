@@ -1,4 +1,4 @@
-package com.eduardocaio.task_manager_project.services;
+package com.eduardocaio.task_manager_project.security;
 
 import java.util.Date;
 
