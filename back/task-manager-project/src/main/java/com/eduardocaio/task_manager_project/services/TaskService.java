@@ -26,12 +26,6 @@ public class TaskService {
 
     public void update(Long id) {
         TaskEntity task = taskRepository.findById(id).get();
-        if(task.getStatus()){
-            task.setStatus(false);
-        }
-        else{
-            task.setStatus(true);
-        }
         taskRepository.save(task);
     }
 
