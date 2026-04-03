@@ -17,13 +17,18 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     public void register(UserEntity user) {
+        UserEntity userRegister = findByUsername(user.getUsername());
+
+        if(userRegister.getUsername().equals(userRegister.getUsername()))
+            throw new RuntimeException("Usuário já cadastrado");
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
     public UserEntity findByUsername(String username) {
         return userRepository.findByUsername(username)
-            .orElseThrow(() -> new RuntimeException("User not found"));
+            .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
     }
 
 }
