@@ -5,6 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.eduardocaio.task_manager_project.entities.UserEntity;
+import com.eduardocaio.task_manager_project.exceptions.UserAlreadyExistsException;
 import com.eduardocaio.task_manager_project.repositories.UserRepository;
 
 @Service
@@ -17,10 +18,8 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     public void register(UserEntity user) {
-        UserEntity userRegister = findByUsername(user.getUsername());
-
-        if(userRegister.getUsername().equals(userRegister.getUsername()))
-            throw new RuntimeException("Usuário já cadastrado");
+        if (findByUsername(user.getUsername()) != null) 
+            throw new UserAlreadyExistsException("Usuário já cadastrado");
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
