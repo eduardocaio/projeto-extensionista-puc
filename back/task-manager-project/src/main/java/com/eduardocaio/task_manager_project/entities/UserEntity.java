@@ -1,5 +1,6 @@
 package com.eduardocaio.task_manager_project.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,7 +17,10 @@ public class UserEntity {
 
     private String name;
     private String lastName;
+
+    @Column(unique = true)
     private String username;
+    
     private String password;
 
 }
