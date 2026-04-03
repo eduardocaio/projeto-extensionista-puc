@@ -3,6 +3,10 @@ package com.eduardocaio.task_manager_project.entities;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import org.springframework.beans.BeanUtils;
+
+import com.eduardocaio.task_manager_project.dto.ProjectDTO;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,5 +33,9 @@ public class ProjectEntity {
     
     @ManyToMany
     private ArrayList<UserEntity> members;
+
+    public ProjectEntity(ProjectDTO project){
+        BeanUtils.copyProperties(project, this);
+    }
 
 }
