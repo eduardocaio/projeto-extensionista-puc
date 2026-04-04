@@ -1,5 +1,7 @@
 package com.eduardocaio.task_manager_project.controllers;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -31,7 +33,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody UserEntity user) {
+    public ResponseEntity<Map<String, String>> login(@RequestBody UserEntity user) {
         UserEntity existingUser = userService.findByUsername(user.getUsername());
 
         if (!new BCryptPasswordEncoder().matches(user.getPassword(), existingUser.getPassword())) {
@@ -39,6 +41,7 @@ public class AuthController {
         }
 
         String token = jwtService.generateToken(user.getUsername());
-        return ResponseEntity.ok(token);
+
+        return ResponseEntity.ok(Map.of("token", token, "name", existingUser.getName()));
     }
 }
