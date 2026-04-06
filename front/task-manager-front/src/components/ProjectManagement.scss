@@ -1,0 +1,62 @@
+.project-form-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 32px;
+  background: #121212;
+  border-radius: 16px;
+  color: #f0f0f0;
+  font-family: 'Inter', sans-serif;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+
+  h2 {
+    margin-bottom: 24px;
+    color: #00d1b2;
+    font-size: 26px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+    label {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #00d1b2;
+    }
+
+    input,
+    select {
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: none;
+      background: #1e1e1e;
+      color: #f0f0f0;
+      font-size: 14px;
+
+      &:focus {
+        outline: 2px solid #00d1b2;
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+
+    .cancel-btn {
+      background: #2d2d2d;
+      color: #fff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+
+      &:hover {
+        background: #444;
+      }
+    }
+  }
+}
