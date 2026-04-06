@@ -1,11 +1,13 @@
 package com.eduardocaio.task_manager_project.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.eduardocaio.task_manager_project.dto.UserDTO;
 import com.eduardocaio.task_manager_project.entities.UserEntity;
 import com.eduardocaio.task_manager_project.exceptions.UserAlreadyExistsException;
 import com.eduardocaio.task_manager_project.repositories.UserRepository;
@@ -20,7 +22,9 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     public void register(UserEntity user) {
-        if (findByUsername(user.getUsername()) != null) 
+        Optional<UserEntity> userOptional = userRepository.findByUsername(user.getUsername());
+
+        if (userOptional.isPresent()) 
             throw new UserAlreadyExistsException("Usuário já cadastrado");
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -40,4 +44,36 @@ public class UserService {
         return users;
     }
 
+    public List<UserDTO> findAll() {
+    List<UserEntity> users = userRepository.findAll();
+    return users.stream()
+            .map(user -> {
+                UserDTO dto = new UserDTO();
+                dto.setId(user.getId());
+                dto.setName(user.getName());
+                dto.setLastName(user.getLastName());
+                dto.setUsername(user.getUsername());
+                dto.setRole(user.getRole().name()); 
+                return dto;
+            })
+            .toList();
+    }
+
+    public void delete(Long id) {
+        UserEntity user = userRepository.findById(id).get();
+        userRepository.delete(user);
+    }
+
+    public void update(UserEntity userEdit) {
+        Optional<UserEntity> userOptional = userRepository.findByUsername(userEdit.getUsername());
+
+        if (!userOptional.isPresent()) 
+            throw new RuntimeException("Usuário não encontrado");
+
+        UserEntity user = userOptional.get();
+        userEdit.setId(user.getId());
+        userEdit.setPassword(passwordEncoder.encode(userEdit.getPassword()));
+
+        userRepository.save(userEdit);
+    }
 }
