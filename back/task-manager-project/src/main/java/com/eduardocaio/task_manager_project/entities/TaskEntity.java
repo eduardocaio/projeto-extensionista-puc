@@ -1,7 +1,9 @@
 package com.eduardocaio.task_manager_project.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.beans.BeanUtils;
 
 import com.eduardocaio.task_manager_project.dto.TaskDTO;
@@ -56,6 +58,11 @@ public class TaskEntity implements Serializable{
     @ManyToOne
     @JoinColumn(name = "assigned_user_id")
     private UserEntity assignedTo;
+
+    private LocalDate deadLine;
+
+    @CreationTimestamp
+    private LocalDate registrationDate;
 
     public TaskEntity(TaskDTO task){
         BeanUtils.copyProperties(task, this);
