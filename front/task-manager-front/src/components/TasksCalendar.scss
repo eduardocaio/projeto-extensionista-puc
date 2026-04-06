@@ -1,0 +1,140 @@
+.tasks-calendar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', sans-serif;
+  color: #e0e0e0;
+
+  .react-calendar {
+    width: 100%;
+    background: #1c1c1e; /* fundo escuro elegante */
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    border: none;
+    font-size: 14px;
+
+    .react-calendar__navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 16px;
+
+      button {
+        background: #2a2a2f;
+        color: #e0e0e0;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &:hover {
+          background: #3d3d42;
+        }
+      }
+    }
+
+    .react-calendar__month-view__days__day {
+      font-weight: 500;
+      color: #e0e0e0;
+      border-radius: 10px;
+      position: relative;
+      padding: 8px 0;
+      margin: 2px;
+      transition: background 0.2s, transform 0.15s;
+
+      &:hover {
+        background: #2e2e33;
+        cursor: pointer;
+        transform: translateY(-2px);
+      }
+    }
+
+    .react-calendar__tile--now {
+      background: #00d1b2;
+      color: #1c1c1e;
+      font-weight: 700;
+      box-shadow: 0 0 0 2px #00a887;
+    }
+
+    .day-tasks {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-top: 4px;
+    }
+
+    .task-badge {
+      display: block;
+      font-size: 10px;
+      font-weight: 600;
+      color: #fff;
+      padding: 2px 6px;
+      border-radius: 10px;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .tasks-list-selected-date {
+    background: #252528; /* fundo escuro suave */
+    color: #e0e0e0;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+
+    h3 {
+      color: #00d1b2;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      .task-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 12px;
+        border-bottom: 1px solid #3a3a3f;
+        border-radius: 8px;
+        background: #2a2a2f;
+        transition: all 0.2s;
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .task-desc { flex: 2; font-size: 14px; }
+        .task-priority {
+          flex: 0 0 auto;
+          padding: 4px 10px;
+          border-radius: 12px;
+          color: #fff;
+          font-weight: 600;
+          text-transform: uppercase;
+          font-size: 12px;
+          box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+        .task-user { flex: 1; font-size: 13px; color: #aaa; text-align: right; }
+      }
+    }
+
+    p {
+      font-size: 14px;
+      color: #999;
+      text-align: center;
+      margin: 12px 0;
+    }
+  }
+}
