@@ -38,6 +38,9 @@ function Login() {
 
       localStorage.setItem("token", data.token);
       localStorage.setItem("name", data.name);
+      localStorage.setItem("role", data.role);
+      localStorage.setItem("username", username);
+
       toast.success("Login realizado com sucesso!");
 
       navigate("/");
